@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+//import { useState, useEffect } from "react";
+import useBlogs from "./useBlogs";
 
 function App() {
+  const [blogPosts] = useBlogs();
+  //FETCHING DATA WITHOUT USING A SEPARATE HOOK:
+  // const [blogPosts, setBlogPosts] = useState([]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/blogs`)
+  //     .then((response) => response.json())
+  //     .then((response) => setBlogPosts(response));
+  // }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Posts:
+      {blogPosts &&
+        blogPosts.map((post) => (
+          <>
+            <div key={post._id}>{post.title}</div>
+            <div key={post._id}>{post.content}</div>
+            <img key={post._id} src={post.image} alt={post.title}></img>
+            <div key={post._id}>{post.createdDate}</div>
+          </>
+        ))}
     </div>
   );
 }
