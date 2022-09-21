@@ -8,7 +8,10 @@ export default function useBlogs() {
   useEffect(() => {
     fetch(`http://localhost:5000/blogs`)
       .then((response) => response.json())
-      .then((response) => setBlogPosts(response));
+      .then((response) => setBlogPosts(response))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
   return [blogPosts];
 }

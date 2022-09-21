@@ -17,12 +17,12 @@ function App() {
       Posts:
       {blogPosts &&
         blogPosts.map((post) => (
-          <>
-            <div key={post._id}>{post.title}</div>
-            <div key={post._id}>{post.content}</div>
-            <img key={post._id} src={post.image} alt={post.title}></img>
-            <div key={post._id}>{post.createdDate}</div>
-          </>
+          <div key={post._id}>
+            <div>{post.title}</div>
+            <div>{post.content}</div>
+            <img src={post.image} alt={post.title}></img>
+            <div>{post.createdDate}</div>
+          </div>
         ))}
     </div>
   );
