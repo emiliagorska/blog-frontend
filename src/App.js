@@ -3,7 +3,7 @@ import "./App.css";
 import useBlogs from "./useBlogs";
 
 function App() {
-  const [blogPosts] = useBlogs();
+  const { blogPosts, loading, error } = useBlogs();
   //FETCHING DATA WITHOUT USING A SEPARATE HOOK:
   // const [blogPosts, setBlogPosts] = useState([]);
   // useEffect(() => {
@@ -12,20 +12,30 @@ function App() {
   //     .then((response) => setBlogPosts(response));
   // }, []);
 
-  return (
-    <div className="App">
-      Posts:
-      {blogPosts &&
-        blogPosts.map((post) => (
-          <div key={post._id}>
-            <div>{post.title}</div>
-            <div>{post.content}</div>
-            <img src={post.image} alt={post.title}></img>
-            <div>{post.createdDate}</div>
-          </div>
-        ))}
-    </div>
-  );
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (loading === false && blogPosts) {
+    return (
+      <div className="App">
+        Posts:
+        {blogPosts &&
+          blogPosts.map((post) => (
+            <div key={post._id}>
+              <div>{post.title}</div>
+              <div>{post.content}</div>
+              <img src={post.image} alt={post.title}></img>
+              <div>{post.createdDate}</div>
+            </div>
+          ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>An error occured when fetching data...</p>;
+  }
 }
 
 export default App;
