@@ -1,0 +1,37 @@
+.post {
+    max-width: 853.29px;
+    display: inline-block;
+    margin-bottom: 40px;
+    background-color: #fff;
+}
+
+.postImage {
+    display: block;
+    width: 853.29px;
+    height: auto;
+}
+
+.postTitle {
+    font-family: Playfair Display;
+    text-decoration: none;
+    font-size: 24px;
+    color: #242321;
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.postTitle:hover {
+    text-decoration:underline;
+}
+
+.postContent {
+    font-family: Lato;
+    font-size: 16px;
+    color: #444444;
+    line-height: 1.33333333;
+    height: 106.64px;
+    overflow: hidden;
+}
+
+
