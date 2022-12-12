@@ -13,7 +13,8 @@ function BlogCard({ post }) {
         {post.title}
       </a>
       <article className="postContent">{postContent}</article>
-      <p> &#x1F4C5; {post.createdDate}</p>
+      <span>&#x1F4C5;</span>
+      <p>{post.createdDate}</p>
     </div>
   );
 }
