@@ -12,8 +12,8 @@ function BlogCard({ post }) {
       <Link to={`/blog/${post._id}`}>
         <img className="postImage" src={post.image} alt={post.title}></img>
       </Link>
-      <Link to={`/blog/${post._id}`} className="postTitle">
-        {post.title}
+      <Link to={`/blog/${post._id}`}>
+        <h2 className="postTitle">{post.title}</h2>
       </Link>
       <article className="postContent">{postContent}</article>
       <span>&#x1F4C5;</span>

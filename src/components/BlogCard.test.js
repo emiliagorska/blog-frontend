@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import BlogCard from "./BlogCard.js";
 
 const testPost = {
@@ -11,26 +12,48 @@ const testPost = {
 
 describe("renders a blog card", () => {
   it("renders a blog post title", () => {
-    render(<BlogCard post={testPost} />);
-    const linkElement = screen.getByRole("link", {
-      name: "Somerville clubhouse",
-    });
-    expect(linkElement).toBeInTheDocument();
+    const { container } = render(
+      <BrowserRouter>
+        <BlogCard post={testPost} />
+      </BrowserRouter>
+    );
+
+    //FOR SOME REASON YOU NEED TO ACCESS ELEMENT RETURNED BY GET ELEMENTS BY CLASSNAME BY INDEX, AS WHAT IS RETURNED IN HTML COLLECTION?
+    const title = container.getElementsByClassName("postTitle")[0];
+    // //console.log("TITLE:", title[0]);
+    // const linkElement = screen.getByRole("link", {
+    //   name: "Somerville clubhouse",
+    // });
+    // console.log("LINK", linkElement);
+    expect(title).toBeInTheDocument();
   });
   it("renders post content", () => {
-    render(<BlogCard post={testPost} />);
+    render(
+      <BrowserRouter>
+        <BlogCard post={testPost} />
+      </BrowserRouter>
+    );
     const content = screen.getByRole("article");
+    //console.log("ARTICLE", content);
     expect(content).toBeInTheDocument();
     expect(content).toHaveTextContent("This is house of AND");
   });
   it("renders an image", () => {
-    render(<BlogCard post={testPost} />);
+    render(
+      <BrowserRouter>
+        <BlogCard post={testPost} />
+      </BrowserRouter>
+    );
     const image = screen.getByAltText("Somerville clubhouse");
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "www.google.com");
   });
   it("renders the date", () => {
-    render(<BlogCard post={testPost} />);
+    render(
+      <BrowserRouter>
+        <BlogCard post={testPost} />
+      </BrowserRouter>
+    );
     const date = screen.getByText("10.10.2022");
     expect(date).toBeInTheDocument();
   });
