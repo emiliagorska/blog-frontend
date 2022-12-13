@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./BlogCard.css";
 
 function BlogCard({ post }) {
@@ -8,10 +9,12 @@ function BlogCard({ post }) {
 
   return (
     <div className="post">
-      <img className="postImage" src={post.image} alt={post.title}></img>
-      <a href="/" className="postTitle">
+      <Link to={`/blog/${post._id}`}>
+        <img className="postImage" src={post.image} alt={post.title}></img>
+      </Link>
+      <Link to={`/blog/${post._id}`} className="postTitle">
         {post.title}
-      </a>
+      </Link>
       <article className="postContent">{postContent}</article>
       <span>&#x1F4C5;</span>
       <p>{post.createdDate}</p>
