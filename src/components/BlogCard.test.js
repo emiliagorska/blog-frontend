@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import BlogCard from "./BlogCard.js";
+import dateChecker from "date-and-time";
 
 const testPost = {
   id: "asdfgh",
@@ -17,14 +18,7 @@ describe("renders a blog card", () => {
         <BlogCard post={testPost} />
       </BrowserRouter>
     );
-
-    //FOR SOME REASON YOU NEED TO ACCESS ELEMENT RETURNED BY GET ELEMENTS BY CLASSNAME BY INDEX, AS WHAT IS RETURNED IN HTML COLLECTION?
     const title = container.getElementsByClassName("postTitle")[0];
-    // //console.log("TITLE:", title[0]);
-    // const linkElement = screen.getByRole("link", {
-    //   name: "Somerville clubhouse",
-    // });
-    // console.log("LINK", linkElement);
     expect(title).toBeInTheDocument();
   });
   it("renders post content", () => {
@@ -34,7 +28,7 @@ describe("renders a blog card", () => {
       </BrowserRouter>
     );
     const content = screen.getByRole("article");
-    //console.log("ARTICLE", content);
+
     expect(content).toBeInTheDocument();
     expect(content).toHaveTextContent("This is house of AND");
   });
@@ -48,7 +42,7 @@ describe("renders a blog card", () => {
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "www.google.com");
   });
-  it("renders the date", () => {
+  it("renders the correct date", () => {
     render(
       <BrowserRouter>
         <BlogCard post={testPost} />
@@ -56,17 +50,19 @@ describe("renders a blog card", () => {
     );
     const date = screen.getByText("10.10.2022");
     expect(date).toBeInTheDocument();
+
+    let dateFormatStatus = dateChecker.isValid(date.textContent, "DD.MM.YYYY");
+    expect(dateFormatStatus).toBe(true);
+  });
+  it("renders a calendar image next to the date", () => {
+    render(
+      <BrowserRouter>
+        <BlogCard post={testPost} />
+      </BrowserRouter>
+    );
+    const calendarIcon = screen.getByTestId("calendarIcon");
+    expect(calendarIcon).toBeInTheDocument();
+    //THE FOLLOWING TEST PASSES, BUT I HAVE A FEELING THERE IS SOMETHING WRONG WITH WRITING TESTS LIKE THAT. NOT SURE HOW ELSE TO CHECK WHETHER THE CALENDAR ICON IS DISPLAYED CORRECTLY THOUGH
+    expect(calendarIcon).toHaveTextContent("📅");
   });
 });
-
-// test("renders learn react link2", () => {
-//   render(<BlogCard post={testPost} />);
-//   const linkElement = screen.getByRole("link");
-//   expect(linkElement).toEqual(expect.stringContaining("Somerville clubhouse"));
-// });
-
-// test("renders learn react link3", () => {
-//   render(<BlogCard post={testPost} />);
-//   const linkElement = screen.getByRole("link");
-//   expect(linkElement).toHaveTextContent("Somerville clubhouse");
-// });
