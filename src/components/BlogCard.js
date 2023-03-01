@@ -1,19 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./BlogCard.css";
 
 function BlogCard({ post }) {
   //124 characters in one line
-  var postContentwithoutEllipsis = post.content.slice(0, 480);
-  var postContent = postContentwithoutEllipsis.concat("", "...");
+  var truncatedPostContent = post.content.slice(0, 480);
+  var truncatedPostContentPlusEllipsis = truncatedPostContent.concat("", "...");
 
   return (
     <div className="post">
-      <img className="postImage" src={post.image} alt={post.title}></img>
-      <a href="/" className="postTitle">
-        {post.title}
-      </a>
-      <article className="postContent">{postContent}</article>
-      <span>&#x1F4C5;</span>
+      <Link to={`/blog/${post._id}`}>
+        <img className="postImage" src={post.image} alt={post.title}></img>
+      </Link>
+      <Link to={`/blog/${post._id}`}>
+        <h2 className="postTitle" data-testid={post._id}>
+          {post.title}
+        </h2>
+      </Link>
+      <article className="postContent">
+        {truncatedPostContentPlusEllipsis}
+      </article>
+      <span data-testid="calendarIcon">&#x1F4C5;</span>
       <p>{post.createdDate}</p>
     </div>
   );
