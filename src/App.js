@@ -1,6 +1,7 @@
 import "./App.css";
+import BlogCard from "./components/BlogCard";
 //import { useState, useEffect } from "react";
-import useBlogs from "./useBlogs";
+import useBlogs from "./customedHooks/useBlogs";
 
 function App() {
   const { blogPosts, loading, error } = useBlogs();
@@ -19,14 +20,10 @@ function App() {
   if (loading === false && blogPosts) {
     return (
       <div className="App">
-        Posts:
         {blogPosts &&
           blogPosts.map((post) => (
             <div key={post._id}>
-              <div>{post.title}</div>
-              <div>{post.content}</div>
-              <img src={post.image} alt={post.title}></img>
-              <div>{post.createdDate}</div>
+              <BlogCard post={post} />
             </div>
           ))}
       </div>
