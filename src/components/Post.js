@@ -1,14 +1,29 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { usePostByID } from "../customedHooks/useBlogs";
+import "./Post.css";
 
-function Post({ postid }) {
+function Post({}) {
   let params = useParams();
+  const { Post, loading, error } = usePostByID(params.id);
+
+  console.log(Post)
 
   return (
     <>
-      <div>This is a single post page for post with id {params.id}</div>
-      <div>
-        <a href="/">Edinburgh Guide</a>
+    <div className="imgContainer">
+    <img className="postImg" src={Post.image} alt={Post.title} />
+    </div>
+    <div className="contentContainer">
+      <div className="postTitle sidebar">
+        {Post.createdDate}
+      </div>
+      <div className="content">
+    <h1 className="postTitle" data-testid={Post._id}>
+          {Post.title}
+          </h1>   
+      <article className="postContent">{Post.content}</article>
+        </div>
       </div>
     </>
   );

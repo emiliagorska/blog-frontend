@@ -12,7 +12,7 @@ function BlogCard({ post }) {
       <Link to={`/blog/${post._id}`}>
         <img className="postImage" src={post.image} alt={post.title}></img>
       </Link>
-      <Link to={`/blog/${post._id}`}>
+      <Link className="postTitleLink" to={`/blog/${post._id}`}>
         <h2 className="postTitle" data-testid={post._id}>
           {post.title}
         </h2>
