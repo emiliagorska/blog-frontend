@@ -1,38 +1,20 @@
 import "./App.css";
-import BlogCard from "./components/BlogCard";
-//import { useState, useEffect } from "react";
-import useBlogs from "./customedHooks/useBlogs";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./components/Home";
+import Post from "./components/Post";
 
 function App() {
-  const { blogPosts, loading, error } = useBlogs();
-  //FETCHING DATA WITHOUT USING A SEPARATE HOOK:
-  // const [blogPosts, setBlogPosts] = useState([]);
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/blogs`)
-  //     .then((response) => response.json())
-  //     .then((response) => setBlogPosts(response));
-  // }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (loading === false && blogPosts) {
-    return (
-      <div className="App">
-        {blogPosts &&
-          blogPosts.map((post) => (
-            <div key={post._id}>
-              <BlogCard post={post} />
-            </div>
-          ))}
-      </div>
-    );
-  }
-
-  if (error) {
-    return <p>An error occured when fetching data...</p>;
-  }
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} exact />
+          <Route path="/blog/:id" element={<Post />} exact />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
