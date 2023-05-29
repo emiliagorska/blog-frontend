@@ -8,7 +8,7 @@ export default function useBlogs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/blogs`)
+    fetch(`https://emilias-blog-api.onrender.com/blogs`)
       .then((response) => response.json())
       .then((response) => setBlogPosts(response))
       .then(() => setLoading(false))
@@ -25,7 +25,7 @@ export function usePostByID(id) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/blogs/${id}`)
+    fetch(`https://emilias-blog-api.onrender.com/blogs/${id}`)
       .then((response) => response.json())
       .then((response) => setPost(response[0]))
       .then(() => setLoading(false))
