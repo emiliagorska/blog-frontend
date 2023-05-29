@@ -31,4 +31,21 @@
     margin-bottom: 30px;
 }
 
-.content {}
+.authorsPhoto {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+
+.postDate {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.calendarIcon {
+    padding-right: 7px;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { usePostByID } from "../customedHooks/useBlogs";
 import "./Post.css";
+//require(myphoto.jpg)
 
 function Post({}) {
   let params = useParams();
@@ -16,7 +17,11 @@ function Post({}) {
     </div>
     <div className="contentContainer">
       <div className="postTitle sidebar">
+      <img className="authorsPhoto" src={require("../assets/myphoto.JPG")} alt="Author of the post" />
+      <div className="postDate">
+      <span className="calendarIcon">&#x1F4C5;</span>
         {Post.createdDate}
+        </div>
       </div>
       <div className="content">
     <h1 className="postTitle" data-testid={Post._id}>
