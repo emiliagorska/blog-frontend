@@ -20,6 +20,8 @@
 .contentContainer {
     display: flex;
     flex-direction: row;
+    margin-right: 30px;
+    text-align: justify;
 }
 
 .sidebar {
